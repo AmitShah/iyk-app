@@ -24,12 +24,15 @@ export default function Home() {
                   method: "eth_requestAccounts",
               }).then((accounts:any[])=>{
                   setTimeout(()=>{
-                    
+                    const acct = accounts[0];
                     sendMessage("Main","UpdateState",JSON.stringify(
                       {
-                        "userName":accounts[0]
+                        "userName":`${acct.substring(0,6)}...${acct.substring(acct.length -4)}`,
+                        "targetIdx":1,
+                        "bossHealth":666666,
+                        "attackPower":580
                       }))
-                  },2000);
+                  },5000);
               });
             
               
