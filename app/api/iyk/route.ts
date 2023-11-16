@@ -6,14 +6,14 @@ export async function GET(request: NextRequest) {
     const id = searchParams.get('iykRef')
     console.log("iykRef",id)
     try{
-        const res = await axios.get(`https://api.iyk.app/refs/${id}`, {
+        const {data} = await axios.get(`https://api.iyk.app/refs/${id}`, {
         headers: {
             'Content-Type': 'application/json',
             'x-iyk-api-key': process.env.IYK_API_KEY
         },
         })
 
-        console.log(res)
+        console.log(data)
     }catch(err){
         console.error(err)
     }
