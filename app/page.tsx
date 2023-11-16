@@ -1,9 +1,7 @@
 'use client'
 
-import { useSearchParams } from "@/node_modules/next/navigation";
 import { useEffect } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
-import axios from "axios";
 
 //https://react-unity-webgl.dev/
 export default function Home() {
@@ -21,13 +19,6 @@ export default function Home() {
     // const iykRef = urlParams.get("iykRef")
     if(isLoaded){
       if (typeof window !== "undefined") {
-        let searchParams = (new URL(window.location.href)).searchParams;
-        const id = searchParams.get("iykRef");
-        axios.get('/api/iyk',{
-          params:{
-            iykRef:id
-          }
-        }).then(console.log);
         if((window as any).ethereum){
           try {
               (window as any).ethereum.request({
