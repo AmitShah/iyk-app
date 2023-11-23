@@ -5,9 +5,7 @@ dotenv.config();
 
 
 export default async function generateAttack(tokenId:number, userAddress:string, quantity:number){
-    console.log(abi);
     const wallet = new ethers.Wallet(process.env.SIGNING_PK as string,new ethers.JsonRpcProvider("https://goerli.base.org"))
-    
     let Boss = new ethers.Contract(process.env.BOSS_ADDRESS as string,abi);
     
     const boss = Boss.connect(wallet)
@@ -30,9 +28,10 @@ export default async function generateAttack(tokenId:number, userAddress:string,
         tokenId: tokenId,
         quantity:quantity,
         user:userAddress,
-        uid: ethers.randomBytes(32)
+        uid: ethers.hexlify(ethers.randomBytes(32))
       };
+      
       const signature = await wallet.signTypedData(domain,types,attackRequest);
       console.log("typescript signer address:",wallet.address);
-      return {attackRequest:attackRequest,signature:signature};
+      return {attackRequest:attackRequest,signature:signature};      
     }
