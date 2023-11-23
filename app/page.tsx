@@ -1,5 +1,6 @@
 'use client'
 
+import axios from "axios";
 import { useEffect } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 
@@ -24,16 +25,27 @@ export default function Home() {
               (window as any).ethereum.request({
                   method: "eth_requestAccounts",
               }).then((accounts:any[])=>{
-                  setTimeout(()=>{
-                    const acct = accounts[0];
-                    sendMessage("Main","UpdateState",JSON.stringify(
-                      {
-                        "userName":`${acct.substring(0,6)}...${acct.substring(acct.length -4)}`,
-                        "targetIdx":1,
-                        "bossHealth":666666,
-                        "attackPower":580
-                      }))
-                  },5000);
+                const { searchParams } = new URL(window.location.href)
+                const iykRef = searchParams.get('iykRef')
+                  axios.get('/api/iyk',{
+                    params:{
+                      userAddress:accounts[0],
+                      iykRef:iykRef
+                    }
+                  }).then((res:any)=>{
+                    console.log(res);
+                    setTimeout(()=>{
+                      const acct = accounts[0];
+                      sendMessage("Main","UpdateState",JSON.stringify(
+                        {
+                          "userName":`${acct.substring(0,6)}...${acct.substring(acct.length -4)}`,
+                          "targetIdx":1,
+                          "bossHealth":666666,
+                          "attackPower":580
+                        }))
+                    },5000);
+                  })
+                  
               });
               
               

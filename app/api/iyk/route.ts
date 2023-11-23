@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
     const id = searchParams.get('iykRef')
     const userAddress = searchParams.get('userAddress') || '0xF97FcCD2A27F59f154D323dB5b40589146400e00'
     console.log("iykRef",id)
+    console.log("userAddress",userAddress)
     try{
         const {data} = await axios.get(`https://api.iyk.app/refs/${id}`, {
         headers: {
@@ -34,7 +35,8 @@ export async function GET(request: NextRequest) {
         }
         */
         console.log(data)
-        if(data.isValidRef){
+        //TODO: we dont care if its a valid tapRef for testing because we cant open inside cb wallet yet
+        if(data.isValidRef || true){
             let tag = tagMap.get(data.uid)
             if(tag){
                 const attackRequest = await generateAttack(0,userAddress as string,tag.quantity)
