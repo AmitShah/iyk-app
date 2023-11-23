@@ -34,12 +34,13 @@ export default function Home() {
                     }
                   }).then((res:any)=>{
                     console.log(res);
+                    const attackRequest = res.data;
                     setTimeout(()=>{
                       const acct = accounts[0];
                       sendMessage("Main","UpdateState",JSON.stringify(
                         {
                           "userName":`${acct.substring(0,6)}...${acct.substring(acct.length -4)}`,
-                          "targetIdx":1,
+                          "targetIdx":attackRequest.targetIdx,
                           "bossHealth":666666,
                           "attackPower":580
                         }))
