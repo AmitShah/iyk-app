@@ -15,7 +15,7 @@ curl -X GET 'https://api.iyk.app/chips/find?e=360153C6B53E49CE75660CB062DCD46D&c
 curl -X PATCH 'https://api.iyk.app/chips' --data-raw '{
     "tagUIDs": ["1293660434600336"],
         "updates": {
-            "redirectUrl": "https://iyk-app.vercel.app/api/iyk"
+            "redirectUrl":  "https://go.cb-w.com/dapp?cb_url=https%3A%2F%2Fiyk-app.vercel.app%2F"
 	    }
 }' -H 'x-iyk-api-key:  ' -H 'Content-Type: application/json'
 
@@ -23,7 +23,7 @@ curl -X PATCH 'https://api.iyk.app/chips' --data-raw '{
 curl -X PATCH 'https://api.iyk.app/chips' --data-raw '{
     "tagUIDs": ["1302456527622544"],
         "updates": {
-            "redirectUrl": "https://iyk-app.vercel.app/api/iyk"
+            "redirectUrl":  "https://go.cb-w.com/dapp?cb_url=https%3A%2F%2Fiyk-app.vercel.app%2F"
 	    }
 }' -H 'x-iyk-api-key:  ' -H 'Content-Type: application/json'
 
@@ -31,6 +31,6 @@ curl -X PATCH 'https://api.iyk.app/chips' --data-raw '{
 curl -X PATCH 'https://api.iyk.app/chips' --data-raw '{
     "tagUIDs": ["1311252620644752"],
         "updates": {
-            "redirectUrl": "https://iyk-app.vercel.app/api/iyk"
+            "redirectUrl": "https://go.cb-w.com/dapp?cb_url=https%3A%2F%2Fiyk-app.vercel.app%2F"
 	    }
 }' -H 'x-iyk-api-key:  ' -H 'Content-Type: application/json'

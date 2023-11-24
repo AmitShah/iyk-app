@@ -1,4 +1,5 @@
-import generateAttack from '@/app/utils/attack';
+import {generateAttack,readHealth} from '@/app/utils/boss';
+import "@/app/utils/helper";
 import { NextRequest, NextResponse } from '@/node_modules/next/server';
 import axios from 'axios';
 
@@ -41,7 +42,9 @@ export async function GET(request: NextRequest) {
             if(tag){
                 const attackRequest = await generateAttack(0,userAddress as string,tag.quantity)
                 console.log("generate attackRequest:",attackRequest)
-                return NextResponse.json({"attackRequest":attackRequest, "targetIdx":tag.targetIdx})    
+                const health = await readHealth(0)
+                console.log("health:",health)
+                return NextResponse.json({"attackRequest":attackRequest, "targetIdx":tag.targetIdx, "health":health})    
             }else{
                 console.warn("tag not found:",data.uid)
             }

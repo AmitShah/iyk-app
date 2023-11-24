@@ -3,12 +3,13 @@ import dotenv from 'dotenv';
 import abi from "./ABI.json";
 dotenv.config(); 
 
+const wallet = new ethers.Wallet(process.env.SIGNING_PK as string,new ethers.JsonRpcProvider("https://goerli.base.org"))
+const Boss = new ethers.Contract(process.env.BOSS_ADDRESS as string,abi);
+const boss = Boss.connect(wallet)
 
-export default async function generateAttack(tokenId:number, userAddress:string, quantity:number){
-    const wallet = new ethers.Wallet(process.env.SIGNING_PK as string,new ethers.JsonRpcProvider("https://goerli.base.org"))
-    let Boss = new ethers.Contract(process.env.BOSS_ADDRESS as string,abi);
-    
-    const boss = Boss.connect(wallet)
+export async function generateAttack(tokenId:number, userAddress:string, quantity:number){
+
+
     const domain = {
         name: "BossERC1155",
         version: "1",
@@ -35,3 +36,8 @@ export default async function generateAttack(tokenId:number, userAddress:string,
       console.log("typescript signer address:",wallet.address);
       return {attackRequest:attackRequest,signature:signature};      
     }
+
+export async function readHealth(tokenId:number):Promise<bigint>{
+    const health = await boss.hitpoints(tokenId);
+    return health;
+}
